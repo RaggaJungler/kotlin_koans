@@ -11,12 +11,12 @@ data class MyDate(val year: Int, val month: Int, val dayOfMonth: Int) : Comparab
 
 }
 
+fun MyDate.plus(interval :TimeInterval) : MyDate {
+    return addTimeIntervals(interval, 1)
+}
+
 fun MyDate.plus(interval :RepeatedTimeInterval) : MyDate {
-    return when(interval){
-        TimeInterval.DAY -> MyDate(this.year, this.month, this.dayOfMonth + 1)
-        TimeInterval.WEEK -> MyDate(this.year, this.month + 1, this.dayOfMonth)
-        TimeInterval.YEAR -> MyDate(this.year + 1, this.month, this.dayOfMonth)
-    }
+    return addTimeIntervals(interval.ti, interval.n)
 }
 
 fun MyDate.rangeTo(date: MyDate) : DateRange {
@@ -27,11 +27,10 @@ enum class TimeInterval {
     DAY
     WEEK
     YEAR
-
 }
 
-fun TimeInterval.times() : TimeInterval {
-    return TimeInterval()
+fun TimeInterval.times(value : Int) : RepeatedTimeInterval {
+    return RepeatedTimeInterval(this, value)
 }
 
 class RepeatedTimeInterval(val ti: TimeInterval, val n: Int)
