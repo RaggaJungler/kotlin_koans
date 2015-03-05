@@ -2,6 +2,7 @@ package iv_builders
 
 import util.TODO
 import java.util.HashSet
+import java.util.HashMap
 
 fun buildString(build: StringBuilder.() -> Unit): String {
     val stringBuilder = StringBuilder()
@@ -31,11 +32,17 @@ fun todoTask23() = TODO(
 )
 
 fun task23(): Map<Int, String> {
-    todoTask23()
-//    return buildMap {
-//        put(0, "0")
-//        for (i in 1..10) {
-//            put(i, "$i")
-//        }
-//    }
+//    todoTask23()
+    return buildMap {
+        put(0, "0")
+        for (i in 1..10) {
+            put(i, "$i")
+        }
+    }
+}
+
+fun buildMap(build: MutableMap<Int, String>.() -> Unit) : MutableMap<Int, String>{
+    val map = HashMap<Int, String>();
+    map.build()
+    return map
 }
