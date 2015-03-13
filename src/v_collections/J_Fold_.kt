@@ -1,7 +1,5 @@
 package v_collections
 
-import java.util.HashSet
-
 fun example9() {
     val product = listOf(1, 2, 3, 4).fold(1, { partProduct, element -> element * partProduct })
     product == 24
@@ -10,14 +8,13 @@ fun example9() {
 // The same as
 fun whatFoldDoes(): Int {
     var product = 1
-    listOf(1, 2, 3, 4).forEach { element -> product = element * product}
+    listOf(1, 2, 3, 4).forEach { element -> product = element * product }
     return product
 }
 
 fun Shop.getProductsOrderedByAllCustomers(): Set<Product> {
     // Return set of products ordered by every customer
     return customers.fold(allOrderedProducts, {
-        orderedByAll, customer ->
-        todoCollectionTask()
+        orderedByAll, customer -> orderedByAll.filter { customer.orders.flatMap { it.products }.contains(it) }.toSet()
     })
 }

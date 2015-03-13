@@ -10,7 +10,14 @@ fun example8() {
     negative == listOf(-4, -11)
 }
 
+fun isSuited(orders : Pair<List<Boolean>, List<Boolean>> ) : Boolean {
+    return orders.second.size() > orders.first.size()
+}
+
 fun Shop.getCustomersWithMoreUndeliveredOrdersThanDelivered(): Set<Customer> {
     // Return customers who have more undelivered orders than delivered
-    todoCollectionTask()
+    //    todoCollectionTask()
+
+    println(customers.partition { isSuited(it.orders.map { it.isDelivered }.partition { it }) })
+    return customers.partition { isSuited(it.orders.map { it.isDelivered }.partition { it }) }.first.toSet()
 }

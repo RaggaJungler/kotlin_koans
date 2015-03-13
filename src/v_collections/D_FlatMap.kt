@@ -1,5 +1,7 @@
 package v_collections
 
+
+
 fun example() {
 
     val result = listOf("abc", "12").flatMap { it.toCharList() }
@@ -9,10 +11,13 @@ fun example() {
 
 val Customer.orderedProducts: Set<Product> get() {
     // Return all products ordered by customer
-    todoCollectionTask()
+//    todoCollectionTask()
+//    return this.orderedProducts.flatMap { it }
+    return this.orders.flatMap { it.products }.toSet()
 }
 
 val Shop.allOrderedProducts: Set<Product> get() {
     // Return all products ordered by all customers
-    todoCollectionTask()
+//    todoCollectionTask()
+    return customers.flatMap { it.orders}.flatMap { it.products }.toSet()
 }
